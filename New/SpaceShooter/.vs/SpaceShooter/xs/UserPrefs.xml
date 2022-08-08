@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{31EA003C-1CF9-D946-A919-8AC5ED6BE76A}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/DestroyPlayer.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Miscellaneous/Properties.cs" Line="13" Column="49" />
+      <File FileName="Assets/Scripts/Player/DestroyPlayer.cs" Line="8" Column="59" />
+      <File FileName="Assets/Scripts/Player/PowerUp.cs" Line="54" Column="48" />
+      <File FileName="Assets/Scripts/Player/PowerUpShield.cs" Line="30" Column="93" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SpaceShooter" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Enemy" expanded="True" />
+                <Node name="Miscellaneous" expanded="True" />
+                <Node name="Player" expanded="True">
+                  <Node name="DestroyPlayer.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="889cd88d-f7eb-4053-b98d-bf74c232af4d" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
