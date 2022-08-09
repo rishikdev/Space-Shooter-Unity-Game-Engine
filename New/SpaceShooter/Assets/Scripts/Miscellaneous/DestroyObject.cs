@@ -34,11 +34,10 @@ public class DestroyObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If the player's spaceship collided with the enemy or enemy bullet, destroy both objects and instantiate player
+        // If the player's spaceship collided with the enemy or enemy bullet, destroy the enemy or enemy bullet. Player's destruction is handled elsewhere.
         if(other.name == Properties.SPACESHIP_NAME && (gameObject.tag == Properties.ENEMY_BULLET_TAG || gameObject.tag == Properties.ENEMY_TAG))
         {
             Destroy(gameObject);
-            //GameObject.FindGameObjectWithTag(Properties.PLAYER).SetActive(false);
         }
     }
 }

@@ -12,6 +12,8 @@ public class Properties : MonoBehaviour
     public const string ENEMY_BULLET_TAG = "EnemyBullet";
     public const string POWERUP_TAG = "PowerUp";
 
+    public const string CANVAS = "Canvas";
+
     public const string PLAYER = "Player";
     public const string SPACESHIP_NAME = "Spaceship";
     public const string PLAYER_SHIELD = "Shield";
@@ -44,4 +46,11 @@ public class Properties : MonoBehaviour
 
     public const string ENEMY_DRONE = "EnemyDrone(Clone)";
     public const string ENEMY_DRONE_NAME = "XianSpaceship";
+
+    public const string UI_REST = "Rest: ";
+    public const string UI_SCORE = "Score: ";
+
+    public const string PLAYER_PREFS_SCORE_KEY = "Score";
+    public const int ENEMY_DRONE_HIT_POINT = 10;
+    public const int POWERUP_POINT = 10;
 }

@@ -14,12 +14,12 @@ public class PowerUp : MonoBehaviour
 
     public powerUpEnum currentPowerUp;
 
-    //private PlayerFire playerFire;
+    private UI score;
 
     void Awake()
     {
-        //playerFire = GetComponent<PlayerFire>();
         currentPowerUp = powerUpEnum.singleBullet;
+        score = GameObject.Find(Properties.CANVAS).GetComponent<UI>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,29 +27,35 @@ public class PowerUp : MonoBehaviour
         if (other.name == Properties.POWERUP_SINGLEBULLET)
         {
             currentPowerUp = powerUpEnum.singleBullet;
+            score.UpdateCurrentScore(Properties.POWERUP_POINT);
             Destroy(other.gameObject);
         }
 
         else if (other.name == Properties.POWERUP_TRIPLEBULLETS)
         {
             currentPowerUp = powerUpEnum.tripleBullets;
+            score.UpdateCurrentScore(Properties.POWERUP_POINT);
             Destroy(other.gameObject);
         }
 
         else if (other.name == Properties.POWERUP_SPREAD)
         {
             currentPowerUp = powerUpEnum.spread;
+            score.UpdateCurrentScore(Properties.POWERUP_POINT);
             Destroy(other.gameObject);
         }
 
         else if (other.name == Properties.POWERUP_LASER)
         {
             currentPowerUp = powerUpEnum.laser;
+            score.UpdateCurrentScore(Properties.POWERUP_POINT);
             Destroy(other.gameObject);
         }
 
         else if (other.name == Properties.POWERUP_SHIELD)
         {
+            score.UpdateCurrentScore(Properties.POWERUP_POINT);
+
             if (isShieldActivated)
                 isSecondShieldActivated = true;
 

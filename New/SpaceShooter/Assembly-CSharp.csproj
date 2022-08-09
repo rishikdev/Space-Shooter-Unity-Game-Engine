@@ -113,9 +113,13 @@
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_FrameRateCounter.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerInputActions.cs" />
     <Compile Include="Assets/Scripts/Player/PowerUp.cs" />
+    <Compile Include="Assets/Scripts/Miscellaneous/MoveBackgroundMainMenu.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_B.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexZoom.cs" />
     <Compile Include="Assets/Sketchfab For Unity/Scripts/AssetBrowser/SketchfabBrowserWindow.cs" />
+    <Compile Include="Assets/Scripts/Miscellaneous/MainMenu.cs" />
+    <Compile Include="Assets/Scripts/Miscellaneous/UI.cs" />
+    <Compile Include="Assets/Scripts/Miscellaneous/GameOver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

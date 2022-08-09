@@ -19,9 +19,13 @@ public class MoveEnemyDrone : MonoBehaviour
     private Vector3 positionDifference;
     private float circleAngle;
     private float angleBetweenDroneAndPlayer;
+
+    private UI ui;
+
     private void Awake()
     {
         playerTransform = GameObject.Find(Properties.PLAYER).transform;
+        ui = GameObject.Find(Properties.CANVAS).GetComponent<UI>();
     }
 
     void FixedUpdate()
@@ -65,15 +69,22 @@ public class MoveEnemyDrone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // If the enemy collided with the player, destroy the enemy. Player's destruction is handled elsewhere.
         if (other.name == Properties.SPACESHIP_NAME)
         {
             Destroy(gameObject);
+
+            ui.UpdateCurrentScore(Properties.ENEMY_DRONE_HIT_POINT);
         }
 
+        // If the player's bullet/laser hits the enemy, destroy the enemy as well as the player's bullet/laser
+        // Also, increment the player's score
         if(other.name == Properties.PLAYER_BULLET || other.name == Properties.PLAYER_LASER)
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+
+            ui.UpdateCurrentScore(Properties.ENEMY_DRONE_HIT_POINT);
         }
     }
 }
