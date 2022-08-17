@@ -1,7 +1,9 @@
-# Space Shooter (New)
+# [Space Shooter (New)](https://rishikdev.github.io/SpaceShooter/)
 ### About Space Shooter
 Space Shooter is a 3D top-down ***shoot 'em up*** game inspired by the classic arcade games of the 1970s and 1980s such as [Galaga](https://en.wikipedia.org/wiki/Galaga),
 and [Asteroids](https://en.wikipedia.org/wiki/Asteroids_(video_game)), as well as some shareware games from the late 1990s such as [DemonStar](https://en.wikipedia.org/wiki/DemonStar).
+
+The game is playable [here](https://rishikdev.github.io/SpaceShooter/).
 
 ### Controls
 Players can use either a gamepad (recommended), or a keyboard and a mouse to play the game.
