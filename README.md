@@ -25,7 +25,7 @@ When the player dies, the spaceship respawns after three seconds with invincibil
 
 ### Enemies
 Currently, this game has only one level with the following enemies:
-* Ramming Ship - This spaceship does not shoot any projectile. It just rams itself into the player and explodes.
+* Ramming ship - This spaceship does not shoot any projectile. It just rams itself into the player and explodes.
 * Drones shooting bullets - These drones appear and start circling the player while shooting bullets at the same time.
 * Drones shooting lasers - These drones appear and start circling the player while firing laser beams at the same time.
 
