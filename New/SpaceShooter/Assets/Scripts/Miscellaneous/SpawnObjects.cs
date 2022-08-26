@@ -5,9 +5,26 @@ using UnityEngine.InputSystem;
 
 public class SpawnObjects : MonoBehaviour
 {
+    /*******************************************
+     * index 0 - single bullet                 *
+     * index 1 - triple bullets                *
+     * index 2 - spread                        *
+     * index 3 - laser                         *
+     * index 4 - shield                        *
+     *******************************************/
     [SerializeField] private GameObject[] powerUps;
-    [SerializeField] private float powerUpSpawnTime = 1f;
-    [SerializeField] private float enemySpawnTime = 1f;
+
+    /******************************************************
+     * index 0 - enemy rammer                             *
+     * index 1 - drone with bullets                       *
+     * index 2 - drone with lasers                        *
+     * index 3 - level 1 boss                             *
+     ******************************************************/
+    [SerializeField] private GameObject[] enemyGameObjects;
+
+    [SerializeField] private float powerUpSpawnTime = 10f;
+    [SerializeField] private float enemySpawnTime = 10f;
+    [SerializeField] private float bossSpawnTime = 5f;
 
     private Transform playerTransform;
     private Transform screenBoundaryOuter;
@@ -27,10 +44,18 @@ public class SpawnObjects : MonoBehaviour
     private InputAction playerMove;
 
     private SpawnPowerUp spawnPowerUp;
-    private SpawnEnemyDrone spawnEnemyDrone;
+    private SpawnEnemy spawnEnemy;
 
     private int powerUpLimit = 2;
-    private int enemyLimit = 5;
+    private int enemyLimit = 10;
+    private int innerBoundsVerticalOffset = 100;
+
+    private bool hasBossSpawned;
+    public bool spawnBoss;
+
+    private Enemy enemy;
+    private UI ui;
+
 
     public enum playerDirectionEnum
     {
@@ -59,7 +84,15 @@ public class SpawnObjects : MonoBehaviour
         SetInnerBounds();
 
         spawnPowerUp = GetComponent<SpawnPowerUp>();
-        spawnEnemyDrone = GetComponent<SpawnEnemyDrone>();
+        spawnEnemy = GetComponent<SpawnEnemy>();
+
+        enemy = GameObject.Find(Properties.ENEMY).GetComponent<Enemy>();
+        ui = GameObject.Find(Properties.UI_CANVAS).GetComponent<UI>();
+
+        hasBossSpawned = false;
+        ui.Image_BossHealthBar.transform.parent.gameObject.SetActive(false);
+
+        spawnBoss = false;
     }
 
     private void OnEnable()
@@ -82,7 +115,8 @@ public class SpawnObjects : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        MoveBounds();
+        if(!enemy.isBossActive)
+            MoveBounds();
 
         powerUpSpawnTime = powerUpSpawnTime - Time.deltaTime;
         enemySpawnTime = enemySpawnTime - Time.deltaTime;
@@ -95,8 +129,20 @@ public class SpawnObjects : MonoBehaviour
 
         if(enemySpawnTime <= 0 && GameObject.FindGameObjectsWithTag(Properties.ENEMY_TAG).Length < enemyLimit)
         {
-            SpawnEnemyDrone();
-            enemySpawnTime = Random.Range(2, 3);
+            SpawnEnemy();
+            enemySpawnTime = Random.Range(1, 3);
+        }
+
+        if(spawnBoss)
+        {
+            bossSpawnTime = bossSpawnTime - Time.deltaTime;
+
+            if(bossSpawnTime <= 0)
+            {
+                if(!hasBossSpawned)
+                    SpawnBoss();
+            }
+                
         }
     }
 
@@ -116,10 +162,10 @@ public class SpawnObjects : MonoBehaviour
         var verticalBound = Camera.main.orthographicSize + Properties.SCREEN_BOUNDARY_OFFSET_INNER;
         var horizontalBound = (verticalBound * Screen.width / Screen.height) + Properties.SCREEN_BOUNDARY_OFFSET_INNER;
 
-        screenBoundaryBottomLeftInner.transform.position = new Vector3(-(horizontalBound - screenBoundaryInner.position.x), -(verticalBound - screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
-        screenBoundaryTopLeftInner.transform.position = new Vector3(-(horizontalBound - screenBoundaryInner.position.x), (verticalBound + screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
-        screenBoundaryTopRightInner.transform.position = new Vector3((horizontalBound + screenBoundaryInner.position.x), (verticalBound + screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
-        screenBoundaryBottomRightInner.transform.position = new Vector3((horizontalBound + screenBoundaryInner.position.x), -(verticalBound - screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
+        screenBoundaryBottomLeftInner.transform.position = new Vector3(-(horizontalBound - screenBoundaryInner.position.x), -(verticalBound - innerBoundsVerticalOffset - screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
+        screenBoundaryTopLeftInner.transform.position = new Vector3(-(horizontalBound - screenBoundaryInner.position.x), (verticalBound - innerBoundsVerticalOffset + screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
+        screenBoundaryTopRightInner.transform.position = new Vector3((horizontalBound + screenBoundaryInner.position.x), (verticalBound - innerBoundsVerticalOffset + screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
+        screenBoundaryBottomRightInner.transform.position = new Vector3((horizontalBound + screenBoundaryInner.position.x), -(verticalBound - innerBoundsVerticalOffset - screenBoundaryInner.position.y), Properties.PLAYER_Z_POSITION);
     }
 
     private void MoveBounds()
@@ -232,14 +278,61 @@ public class SpawnObjects : MonoBehaviour
         spawnPowerUp.Spawn(playerMoveDirectionX, playerMoveDirectionY, randomPowerUp, positions, directions);
     }
 
-    private void SpawnEnemyDrone()
+    private void SpawnEnemy()
     {
         List<Vector3> positions = GetPositions();
-        List<Vector3> directions = GetDirections();
 
         float playerMoveDirectionX = playerMoveDirection.x;
         float playerMoveDirectionY = playerMoveDirection.y;
 
-        spawnEnemyDrone.Spawn(playerMoveDirectionX, playerMoveDirectionY, positions, directions);
+        // If the player has killed 5 rammers or 5 drones with bullets, start spawning drones with lasers as well
+        if (enemy.GetEnemyWithBulletsKilledCount() <= 5 || enemy.GetEnemyRammerKilledCount() <= 5)    // <= 5
+        {
+            spawnEnemy.Spawn(enemyGameObjects[0], playerMoveDirectionX, playerMoveDirectionY, positions);
+            spawnEnemy.Spawn(enemyGameObjects[1], playerMoveDirectionX, playerMoveDirectionY, positions);
+        }
+
+        else
+        {
+            // If the player has killed 15 drones with lasers and an additional 10 drones with bullets, spawn the boss
+            if (enemy.GetEnemyWithLasersKilledCount() <= 15 && enemy.GetEnemyWithBulletsKilledCount() <= 15)  //<= 15, <= 15
+            {
+                if (Random.Range(0, 10) <= 3)
+                {
+                    spawnEnemy.Spawn(enemyGameObjects[0], playerMoveDirectionX, playerMoveDirectionY, positions);
+                    spawnEnemy.Spawn(enemyGameObjects[1], playerMoveDirectionX, playerMoveDirectionY, positions);
+                }
+
+                else
+                    spawnEnemy.Spawn(enemyGameObjects[2], playerMoveDirectionX, playerMoveDirectionY, positions);
+            }
+
+            else
+            {
+                if (GameObject.FindGameObjectsWithTag(Properties.ENEMY_TAG).Length == 0)
+                {
+                    spawnBoss = true;
+                }
+            }
+        }
+    }
+
+    private void SpawnBoss()
+    {
+        hasBossSpawned = true;
+        SpawnShieldPowerUp();
+
+        enemy.ActivateBoss();
+        hasBossSpawned = true;
+        spawnEnemy.SpawnBoss(enemyGameObjects[3]);
+        ui.Image_BossHealthBar.transform.parent.gameObject.SetActive(true);
+    }
+
+    private void SpawnShieldPowerUp()
+    {
+        GameObject shieldPowerUp = powerUps[4];
+        List<Vector3> directions = GetDirections();
+
+        spawnPowerUp.SpawnShieldBeforeBossBattle(shieldPowerUp, screenBoundaryBottomRightOuter.transform.position.x, directions);
     }
 }

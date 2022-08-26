@@ -53,6 +53,33 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TurboFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""3044e8ce-77b1-4f27-b28c-d2005fd1dd41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateLeftKeyboard"",
+                    ""type"": ""Button"",
+                    ""id"": ""4664d65b-3677-439b-aaf1-79d38b593780"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateRightKeyboard"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa8f25bf-7171-46c0-a11a-3b0b117ceb6c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -273,6 +300,50 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01a7dd08-b68b-4020-a0c5-3832e0f0eb44"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurboFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28dc3211-ae07-4aea-827e-0ff85fa8628b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""TurboFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64d2f1a1-ed01-416a-8296-5f3cdabde139"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""RotateLeftKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""763c5215-7a5a-43e2-a60a-05a5a00b5b36"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""RotateRightKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -863,6 +934,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_TurboFire = m_Player.FindAction("TurboFire", throwIfNotFound: true);
+        m_Player_RotateLeftKeyboard = m_Player.FindAction("RotateLeftKeyboard", throwIfNotFound: true);
+        m_Player_RotateRightKeyboard = m_Player.FindAction("RotateRightKeyboard", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -937,6 +1011,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_TurboFire;
+    private readonly InputAction m_Player_RotateLeftKeyboard;
+    private readonly InputAction m_Player_RotateRightKeyboard;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -944,6 +1021,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @TurboFire => m_Wrapper.m_Player_TurboFire;
+        public InputAction @RotateLeftKeyboard => m_Wrapper.m_Player_RotateLeftKeyboard;
+        public InputAction @RotateRightKeyboard => m_Wrapper.m_Player_RotateRightKeyboard;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -962,6 +1042,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @TurboFire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurboFire;
+                @TurboFire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurboFire;
+                @TurboFire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurboFire;
+                @RotateLeftKeyboard.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateLeftKeyboard;
+                @RotateLeftKeyboard.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateLeftKeyboard;
+                @RotateLeftKeyboard.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateLeftKeyboard;
+                @RotateRightKeyboard.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateRightKeyboard;
+                @RotateRightKeyboard.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateRightKeyboard;
+                @RotateRightKeyboard.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateRightKeyboard;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -975,6 +1064,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @TurboFire.started += instance.OnTurboFire;
+                @TurboFire.performed += instance.OnTurboFire;
+                @TurboFire.canceled += instance.OnTurboFire;
+                @RotateLeftKeyboard.started += instance.OnRotateLeftKeyboard;
+                @RotateLeftKeyboard.performed += instance.OnRotateLeftKeyboard;
+                @RotateLeftKeyboard.canceled += instance.OnRotateLeftKeyboard;
+                @RotateRightKeyboard.started += instance.OnRotateRightKeyboard;
+                @RotateRightKeyboard.performed += instance.OnRotateRightKeyboard;
+                @RotateRightKeyboard.canceled += instance.OnRotateRightKeyboard;
             }
         }
     }
@@ -1134,6 +1232,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnTurboFire(InputAction.CallbackContext context);
+        void OnRotateLeftKeyboard(InputAction.CallbackContext context);
+        void OnRotateRightKeyboard(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

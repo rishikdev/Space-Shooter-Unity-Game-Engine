@@ -11,16 +11,23 @@ public class MoveBackground : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Material material;
     private Vector2 offset;
+    private Enemy enemy;
 
     private void Awake()
     {
         playerGameObject = GameObject.Find(Properties.PLAYER);
         meshRenderer = GetComponent<MeshRenderer>();
         material = meshRenderer.material;
+        enemy = GameObject.Find(Properties.ENEMY).GetComponent<Enemy>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+    }
+
+    private void Move()
     {
         // Changing the offset of the material
         offset = material.mainTextureOffset;
@@ -29,6 +36,7 @@ public class MoveBackground : MonoBehaviour
 
         material.mainTextureOffset = offset;
 
+        if(!enemy.isBossActive)
         // Setting the position of the background to match the position of the player
         transform.position = new Vector3(playerGameObject.transform.position.x,
                                          playerGameObject.transform.position.y,

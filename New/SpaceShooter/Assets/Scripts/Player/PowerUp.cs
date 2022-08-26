@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
+    [SerializeField] private AudioClip powerUpAudioClip;
     public enum powerUpEnum
     {
         singleBullet, tripleBullets, spread, laser,
@@ -11,15 +12,17 @@ public class PowerUp : MonoBehaviour
 
     public bool isShieldActivated;
     public bool isSecondShieldActivated;    // This variable is used when the player gets another shield while the first shield is still active
-
     public powerUpEnum currentPowerUp;
 
     private UI score;
+    private AudioSource audioSource;
 
     void Awake()
     {
         currentPowerUp = powerUpEnum.singleBullet;
-        score = GameObject.Find(Properties.CANVAS).GetComponent<UI>();
+        score = GameObject.Find(Properties.UI_CANVAS).GetComponent<UI>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,6 +31,7 @@ public class PowerUp : MonoBehaviour
         {
             currentPowerUp = powerUpEnum.singleBullet;
             score.UpdateCurrentScore(Properties.POWERUP_POINT);
+            audioSource.PlayOneShot(powerUpAudioClip);
             Destroy(other.gameObject);
         }
 
@@ -35,6 +39,7 @@ public class PowerUp : MonoBehaviour
         {
             currentPowerUp = powerUpEnum.tripleBullets;
             score.UpdateCurrentScore(Properties.POWERUP_POINT);
+            audioSource.PlayOneShot(powerUpAudioClip);
             Destroy(other.gameObject);
         }
 
@@ -42,6 +47,7 @@ public class PowerUp : MonoBehaviour
         {
             currentPowerUp = powerUpEnum.spread;
             score.UpdateCurrentScore(Properties.POWERUP_POINT);
+            audioSource.PlayOneShot(powerUpAudioClip);
             Destroy(other.gameObject);
         }
 
@@ -49,6 +55,7 @@ public class PowerUp : MonoBehaviour
         {
             currentPowerUp = powerUpEnum.laser;
             score.UpdateCurrentScore(Properties.POWERUP_POINT);
+            audioSource.PlayOneShot(powerUpAudioClip);
             Destroy(other.gameObject);
         }
 
@@ -60,6 +67,7 @@ public class PowerUp : MonoBehaviour
                 isSecondShieldActivated = true;
 
             isShieldActivated = true;
+            audioSource.PlayOneShot(powerUpAudioClip);
             Destroy(other.gameObject);
         }
     }

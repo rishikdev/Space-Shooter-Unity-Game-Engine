@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Miscellaneous/MoveBackground.cs" />
+    <Compile Include="Assets/Scripts/MainMenu/MainMenu.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_A.cs" />
     <Compile Include="Assets/Sketchfab For Unity/Scripts/SketchfabLogger.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexShakeA.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets/Sketchfab For Unity/Scripts/AssetBrowser/SketchfabBrowserManager.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_DigitValidator.cs" />
     <Compile Include="Assets/Sketchfab For Unity/Scripts/SketchfabExporter.cs" />
+    <Compile Include="Assets/Scripts/Enemy/PlayEnemyDestructionSound.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshSpawner.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerMovement.cs" />
     <Compile Include="Assets/Scripts/Player/DestroyPlayer.cs" />
@@ -85,41 +87,48 @@
     <Compile Include="Assets/Sketchfab For Unity/Scripts/Resizer.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexJitter.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" />
-    <Compile Include="Assets/Scripts/Enemy/SpawnEnemyDrone.cs" />
+    <Compile Include="Assets/Scripts/Enemy/SpawnEnemy.cs" />
     <Compile Include="Assets/Sketchfab For Unity/Scripts/SketchfabApi.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/DropdownSample.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexColorCycler.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TeleType.cs" />
-    <Compile Include="Assets/Scripts/Enemy/MoveEnemyDrone.cs" />
+    <Compile Include="Assets/Scripts/Enemy/DroneWithBullets/EnemyDroneWithBullets.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark01.cs" />
     <Compile Include="Assets/Scripts/Miscellaneous/MoveCamera.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SkewTextExample.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SimpleScript.cs" />
+    <Compile Include="Assets/Scripts/Miscellaneous/UI.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark01_UGUI.cs" />
     <Compile Include="Assets/Scripts/Player/PowerUpShield.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark04.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ChatController.cs" />
+    <Compile Include="Assets/Scripts/Enemy/Level1Boss/Level1BossMovement.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets/Scripts/Enemy/Level1Boss/DestroyLevel1Boss.cs" />
+    <Compile Include="Assets/Scripts/Enemy/DroneWithLasers/EnemyDroneWithLasers.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ObjectSpin.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventCheck.cs" />
     <Compile Include="Assets/Scripts/Miscellaneous/Properties.cs" />
+    <Compile Include="Assets/Scripts/LevelComplete/LevelComplete.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ShaderPropAnimator.cs" />
     <Compile Include="Assets/Sketchfab For Unity/Scripts/SketchfabImporterWindow.cs" />
+    <Compile Include="Assets/Scripts/GameOver/GameOver.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/WarpTextExample.cs" />
+    <Compile Include="Assets/Scripts/Enemy/Enemy.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark02.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark03.cs" />
     <Compile Include="Assets/StarfieldMaterials/Scripts/Move.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_FrameRateCounter.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerInputActions.cs" />
     <Compile Include="Assets/Scripts/Player/PowerUp.cs" />
-    <Compile Include="Assets/Scripts/Miscellaneous/MoveBackgroundMainMenu.cs" />
+    <Compile Include="Assets/Scripts/MainMenu/MoveBackgroundMainMenu.cs" />
+    <Compile Include="Assets/Scripts/Enemy/Level1Boss/Level1BossFire.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_B.cs" />
+    <Compile Include="Assets/Scripts/Miscellaneous/Transition.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexZoom.cs" />
     <Compile Include="Assets/Sketchfab For Unity/Scripts/AssetBrowser/SketchfabBrowserWindow.cs" />
-    <Compile Include="Assets/Scripts/Miscellaneous/MainMenu.cs" />
-    <Compile Include="Assets/Scripts/Miscellaneous/UI.cs" />
-    <Compile Include="Assets/Scripts/Miscellaneous/GameOver.cs" />
+    <Compile Include="Assets/Scripts/Enemy/EnemyRammer/EnemyRammer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
@@ -133,6 +142,7 @@
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader" />
     <None Include="Assets/Seamless Space Backgrounds/License.txt" />
+    <None Include="Assets/Import/Death Row Spaceship/license.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets/Import/Raven Spaceship/license.txt" />
     <None Include="Assets/Sketchfab For Unity/Dependencies/Libraries/Newtonsoft.Json.dll" />
@@ -146,6 +156,7 @@
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
     <None Include="Assets/Sketchfab For Unity/Dependencies/Libraries/SketchfabPlugin.dll" />
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
+    <None Include="Assets/Import/Sci-Fi Personal Space Pod Ship/license.txt" />
     <None Include="Assets/StarfieldMaterials/README/Readme.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets/Import/Xian SpaceShip/license.txt" />

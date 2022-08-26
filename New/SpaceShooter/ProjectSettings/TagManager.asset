@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - EnemyBullet
   - PlayerBullet
+  - EnemyStunBullet
+  - PlayerLaser
+  - EnemyBoss
   layers:
   - Default
   - TransparentFX

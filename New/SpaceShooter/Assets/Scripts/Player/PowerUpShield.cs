@@ -34,7 +34,7 @@ public class PowerUpShield : MonoBehaviour
 
             shieldTimer = shieldTimer - Time.deltaTime;
 
-            shieldColour.a = originalAlpha * (shieldTimer / originalShieldTimer);
+            shieldColour.a = Mathf.Max(0.075f, originalAlpha * (shieldTimer / originalShieldTimer));
             shieldMaterial.color = shieldColour;
 
             if(shieldTimer <= 0)

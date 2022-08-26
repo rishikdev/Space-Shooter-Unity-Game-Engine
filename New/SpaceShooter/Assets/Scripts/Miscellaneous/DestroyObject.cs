@@ -8,6 +8,7 @@ public class DestroyObject : MonoBehaviour
     private GameObject screenBoundaryTopLeft;
     private GameObject screenBoundaryTopRight;
     private GameObject screenBoundaryBottomRight;
+    private Transform playerTransform;
 
     void Awake()
     {
@@ -15,6 +16,8 @@ public class DestroyObject : MonoBehaviour
         screenBoundaryTopLeft = GameObject.Find(Properties.SCREEN_BOUNDARY_TOP_LEFT_OUTER);
         screenBoundaryTopRight = GameObject.Find(Properties.SCREEN_BOUNDARY_TOP_RIGHT_OUTER);
         screenBoundaryBottomRight = GameObject.Find(Properties.SCREEN_BOUNDARY_BOTTOM_RIGHT_OUTER);
+
+        playerTransform = GameObject.Find(Properties.PLAYER).transform;
     }
 
     // Update is called once per frame
@@ -34,10 +37,15 @@ public class DestroyObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If the player's spaceship collided with the enemy or enemy bullet, destroy the enemy or enemy bullet. Player's destruction is handled elsewhere.
-        if(other.name == Properties.SPACESHIP_NAME && (gameObject.tag == Properties.ENEMY_BULLET_TAG || gameObject.tag == Properties.ENEMY_TAG))
-        {
+        if (other.name == Properties.SPACESHIP_NAME && gameObject.tag == Properties.ENEMY_BULLET_TAG)
             Destroy(gameObject);
+
+        if (other.name == Properties.SPACESHIP_NAME && gameObject.tag == Properties.ENEMY_STUN_BULLET_TAG)
+        {
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3();
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            Destroy(gameObject, 2);
         }
     }
 }

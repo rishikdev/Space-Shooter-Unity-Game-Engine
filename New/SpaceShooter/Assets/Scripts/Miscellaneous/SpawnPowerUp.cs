@@ -78,6 +78,12 @@ public class SpawnPowerUp : MonoBehaviour
         }
     }
 
+    public void SpawnShieldBeforeBossBattle(GameObject shieldPowerUp, float xPosition, List<Vector3> directions)
+    {
+        // Spawning shield at down-right position of screen and it moving leftwards
+        InstantiateShieldBeforeBossBattle(shieldPowerUp, new Vector3(xPosition, playerTransform.position.y, Properties.PLAYER_Z_POSITION), directions[6]);
+    }
+
     private void InstantiatePowerUpAtRandomLocation(GameObject randomPowerUp, List<Vector3> positions, List<Vector3> directions)
     {
         Vector3 randomPosition = positions[Random.Range(0, positions.Count)];
@@ -93,5 +99,12 @@ public class SpawnPowerUp : MonoBehaviour
         GameObject powerUp = Instantiate(randomPowerUp, position, playerTransform.rotation);
 
         powerUp.GetComponent<Rigidbody>().AddRelativeForce(direction * powerUpSpeed);
+    }
+
+    private void InstantiateShieldBeforeBossBattle(GameObject shieldPowerUp, Vector3 position, Vector3 direction)
+    {
+        GameObject powerUp = Instantiate(shieldPowerUp, position, playerTransform.rotation);
+
+        powerUp.GetComponent<Rigidbody>().AddRelativeForce(direction * powerUpSpeed * 10);
     }
 }
